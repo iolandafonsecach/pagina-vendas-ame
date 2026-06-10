@@ -1,0 +1,44 @@
+---
+import CTAButton from './CTAButton.astro'
+---
+<header
+  id="sticky-header"
+  class="fixed top-0 left-0 right-0 z-50 translate-y-[-100%] transition-transform duration-300"
+  style="background: rgba(242,238,231,0.90); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(62,44,36,0.10);"
+>
+  <div class="max-w-container mx-auto px-5 md:px-10 h-16 flex items-center justify-between">
+    <span class="font-body font-medium text-[14px] text-text tracking-[0.04em]">
+      Acelerador de Resultados · Método AME
+    </span>
+    <CTAButton
+      href="#TODO-link-hotmart"
+      gtmLocation="header_sticky"
+      gtmLabel="quero_participar"
+      class="!min-h-[40px] !px-6 !text-[13px]"
+    >
+      Quero Participar
+    </CTAButton>
+  </div>
+</header>
+
+<script>
+  function initStickyHeader() {
+    const header = document.getElementById('sticky-header')
+    const trigger = document.getElementById('dobra-03')
+    if (!header || !trigger) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
+          header.style.transform = 'translateY(0)'
+        } else {
+          header.style.transform = 'translateY(-100%)'
+        }
+      },
+      { threshold: 0 }
+    )
+    observer.observe(trigger)
+  }
+
+  document.addEventListener('DOMContentLoaded', initStickyHeader)
+</script>

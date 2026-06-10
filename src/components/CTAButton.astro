@@ -1,0 +1,34 @@
+---
+interface Props {
+  href: string
+  gtmLocation: string
+  gtmLabel: string
+  class?: string
+  glow?: boolean
+  fullWidth?: boolean
+}
+
+const { href, gtmLocation, gtmLabel, class: className, glow = false, fullWidth = false } = Astro.props
+const isExternal = href.startsWith('http') || href.startsWith('https')
+---
+<a
+  href={href}
+  class:list={[
+    'cta-btn inline-flex items-center justify-center',
+    'bg-primary text-bg font-body font-semibold',
+    'rounded-btn transition-all duration-200',
+    'min-h-[52px] px-6 text-[14px] md:text-[15px] tracking-[0.01em]',
+    'hover:bg-primary-hover hover:scale-[1.02] hover:shadow-cta',
+    'active:scale-[0.98]',
+    'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary',
+    { 'btn-glow': glow },
+    { 'w-full': fullWidth },
+    className,
+  ]}
+  data-gtm-event="cta_click"
+  data-gtm-location={gtmLocation}
+  data-gtm-label={gtmLabel}
+  {...isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}}
+>
+  <slot />
+</a>

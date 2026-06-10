@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Fontes */
+@layer base {
+  html {
+    font-family: 'Sora', ui-sans-serif, sans-serif;
+    scroll-behavior: smooth;
+    background-color: #F2EEE7;
+    color: #3E2C24;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Animações de scroll — só ativa quando JS está disponível */
+.js-ready .will-animate {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-in {
+  animation: fadeSlideUp 500ms ease-out both;
+}
+
+/* Slide in lateral */
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.animate-in-left {
+  animation: slideInLeft 500ms ease-out both;
+}
+
+.animate-in-right {
+  animation: slideInRight 500ms ease-out both;
+}
+
+.will-animate-left,
+.will-animate-right {
+  opacity: 0;
+}
+
+/* Glow pulsante CTA */
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 8px 24px rgba(184, 154, 106, 0.35); }
+  50%       { box-shadow: 0 0 32px rgba(184, 154, 106, 0.55); }
+}
+
+.btn-glow {
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+/* WhatsApp button pulse */
+@keyframes whatsappPulse {
+  0%, 100% {
+    box-shadow: 0 4px 20px rgba(37,211,102,0.5), 0 2px 8px rgba(0,0,0,0.20);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 4px 32px rgba(37,211,102,0.75), 0 2px 12px rgba(0,0,0,0.25);
+    transform: scale(1.06);
+  }
+}
+
+.whatsapp-pulse {
+  animation: whatsappPulse 2s ease-in-out infinite;
+}
+
+.whatsapp-pulse:hover {
+  animation: none;
+  transform: scale(1.1);
+}
+
+/* Grain overlay terracota */
+.grain-overlay {
+  position: relative;
+}
+
+.grain-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.08;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px;
+  z-index: 1;
+}
+
+.grain-overlay > * {
+  position: relative;
+  z-index: 2;
+}

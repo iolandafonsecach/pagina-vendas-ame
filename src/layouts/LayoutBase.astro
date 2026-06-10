@@ -1,0 +1,58 @@
+---
+import '@fontsource/playfair-display/400.css'
+import '@fontsource/playfair-display/400-italic.css'
+import '@fontsource/playfair-display/600.css'
+import '@fontsource/playfair-display/700.css'
+import '@fontsource/sora/400.css'
+import '@fontsource/sora/500.css'
+import '@fontsource/sora/600.css'
+import '@fontsource/sora/700.css'
+import '../styles/global.css'
+
+interface Props {
+  title: string
+  description: string
+  ogImage?: string
+}
+
+const { title, description, ogImage } = Astro.props
+---
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  {ogImage && <meta property="og:image" content={ogImage} />}
+  <!-- Google Tag Manager -->
+  <!-- TODO: substituir GTM-XXXXXXX pelo ID real antes do deploy -->
+  <script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+  <!-- End Google Tag Manager -->
+</head>
+<body class="bg-bg text-text font-body">
+  <!-- Google Tag Manager (noscript) -->
+  <!-- TODO: substituir GTM-XXXXXXX pelo ID real antes do deploy -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <script is:inline>
+    document.documentElement.classList.add('js-ready');
+    window.addEventListener('load', function () {
+      setTimeout(function () {
+        document.querySelectorAll('.will-animate').forEach(function (el) {
+          if (!el.classList.contains('animate-in')) {
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+          }
+        });
+      }, 1500);
+    });
+  </script>
+  <slot />
+</body>
+</html>
