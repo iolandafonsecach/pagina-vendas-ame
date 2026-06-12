@@ -1,0 +1,619 @@
+---
+import LayoutBase from '../layouts/LayoutBase.astro'
+import CTAButton from './CTAButton.astro'
+import StickyHeader from './StickyHeader.astro'
+import WhatsAppButton from './WhatsAppButton.astro'
+import { Icon } from 'astro-icon/components'
+
+interface Props {
+  variante: 'A' | 'B'
+}
+
+const { variante } = Astro.props
+
+const HOTMART_LINK = '#TODO-link-hotmart'
+
+// ─── Configuração por variante ───────────────────────────────────────────────
+const config = {
+  A: {
+    // D03 — Oportunidade: creme, conforme wireframe
+    d03Class:      'bg-bg',
+    d03Style:      '',
+    d03H2Style:    '',
+    d03H2Class:    'font-heading font-bold text-text text-[26px] md:text-[34px] leading-[1.18] text-center max-w-[600px] mx-auto will-animate',
+    d03DividerStyle: 'background: rgba(62,44,36,0.12);',
+    d03PClass:     'font-body text-text text-[15px] md:text-[17px] leading-[1.65] text-center md:text-left mb-6 will-animate',
+    d03PStyle:     '',
+    d03P3Class:    'font-body font-medium text-text text-[15px] md:text-[17px] leading-[1.65] text-center md:text-left will-animate',
+    d03P3Style:    '',
+
+    // D06 — Perfis: cores do wireframe original (rosa / lilás / laranja)
+    perfis: [
+      { emoji: '🌸', nome: 'Fome Desregulada',    cor: '#cc66cc', bg: 'rgba(255,173,255,0.15)', borda: '#ffadff', delay: '0'   },
+      { emoji: '💜', nome: 'Energia Baixa',        cor: '#7a55dd', bg: 'rgba(158,125,255,0.15)', borda: '#9e7dff', delay: '150' },
+      { emoji: '🧡', nome: 'Inflamação Metabólica', cor: '#dd6633', bg: 'rgba(255,153,102,0.15)', borda: '#ff9966', delay: '300' },
+    ],
+
+    // D13 — CTA Final: creme + radial suave, conforme wireframe
+    d13Style:      'background-color: #F2EEE7;',
+    d13RadialStyle:'background: radial-gradient(circle, rgba(184,154,106,0.10) 0%, transparent 70%);',
+  },
+
+  B: {
+    // D03 — Oportunidade: fundo dourado para tornar #B89A6A protagonista
+    d03Class:      'grain-overlay relative',
+    d03Style:      'background:#B89A6A;',
+    d03H2Class:    'font-heading font-bold text-[26px] md:text-[34px] leading-[1.18] text-center max-w-[600px] mx-auto will-animate',
+    d03H2Style:    'color:#F2EEE7;',
+    d03DividerStyle: 'background: rgba(242,238,231,0.35);',
+    d03PClass:     'font-body text-[15px] md:text-[17px] leading-[1.65] text-center md:text-left mb-6 will-animate',
+    d03PStyle:     'color: rgba(242,238,231,0.90);',
+    d03P3Class:    'font-body font-medium text-[15px] md:text-[17px] leading-[1.65] text-center md:text-left will-animate',
+    d03P3Style:    'color: #F2EEE7;',
+
+    // D06 — Perfis: paleta real (dourado / terracota / espresso)
+    perfis: [
+      { emoji: '🌸', nome: 'Fome Desregulada',    cor: '#9e8358', bg: 'rgba(184,154,106,0.14)', borda: '#B89A6A', delay: '0'   },
+      { emoji: '✨', nome: 'Energia Baixa',        cor: '#8A5A44', bg: 'rgba(138,90,68,0.10)',   borda: '#8A5A44', delay: '150' },
+      { emoji: '🌿', nome: 'Inflamação Metabólica', cor: '#3E2C24', bg: 'rgba(62,44,36,0.07)',   borda: '#3E2C24', delay: '300' },
+    ],
+
+    // D13 — CTA Final: gradiente dourado mais presente
+    d13Style:      'background: linear-gradient(160deg, #F2EEE7 0%, #EDE3CE 55%, #E5D5B4 100%);',
+    d13RadialStyle:'background: radial-gradient(circle, rgba(184,154,106,0.28) 0%, transparent 65%);',
+  },
+} as const
+
+const c = config[variante]
+---
+
+<LayoutBase
+  title="Acelerador de Resultados · Método AME | Dra. Márcia Rocha"
+  description="O programa de acompanhamento personalizado da Dra. Márcia Rocha para mulheres 40+ que querem emagrecer definitivamente."
+>
+  <StickyHeader />
+  <WhatsAppButton />
+
+  <!-- D01 — HERO -->
+  <section id="dobra-01" class="bg-bg relative overflow-hidden">
+    <div
+      class="absolute top-[-80px] right-[-60px] w-[480px] h-[480px] rounded-full pointer-events-none z-0"
+      style="background: radial-gradient(circle, rgba(184,154,106,0.12) 0%, transparent 70%);"
+    ></div>
+    <div class="max-w-container mx-auto px-5 md:px-10 py-16 md:py-[100px] relative z-10">
+      <div class="flex flex-col md:flex-row md:items-center md:gap-12">
+        <div class="md:w-[58%]">
+          <p class="font-body font-semibold text-primary text-[11px] uppercase tracking-[0.1em] mb-6">
+            Acelerador de Resultados · Método AME
+          </p>
+          <h1
+            class="font-heading font-bold text-text leading-[1.18] mb-6"
+            style="font-size: clamp(24px, 2.8vw, 44px);"
+          >
+            Ative o metabolismo, emagreça de forma definitiva e recupere a energia que você achava que tinha perdido.
+          </h1>
+          <p class="font-body text-muted leading-[1.65] text-[15px] md:text-[17px] max-w-[65ch]">
+            O programa de acompanhamento personalizado da Dra. Márcia Rocha para mulheres 40+ que querem emagrecer definitivamente.
+          </p>
+        </div>
+        <div class="md:w-[42%] mb-8 md:mb-0">
+          <div
+            class="relative w-full rounded-[20px] overflow-hidden"
+            style="aspect-ratio: 3/4; max-height: 520px;"
+          >
+            <img
+              src="/images/hero-marcia-quente.jpg"
+              alt="Dra. Márcia Rocha — médica especialista em Nutrologia e Medicina Integrativa"
+              class="w-full h-full object-cover object-top"
+              loading="eager"
+              fetchpriority="high"
+            />
+            <div
+              class="absolute inset-0 pointer-events-none"
+              style="background: linear-gradient(to top, rgba(242,238,231,0.5) 0%, transparent 20%);"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- D02 — PROBLEMA -->
+  <section id="dobra-02" class="bg-surface">
+    <div class="max-w-container mx-auto px-5 md:px-10 py-16 md:py-[100px]">
+      <h2 class="font-heading font-bold text-text text-[26px] md:text-[34px] leading-[1.22] text-center mb-12 will-animate">
+        Você se identifica com isso?
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+        {[
+          { frase: 'Já tentei várias dietas e nada funciona de verdade.', delay: '0' },
+          { frase: 'Perco peso mas sempre ganho tudo de volta.', delay: '100' },
+          { frase: 'Sinto fome o tempo todo ou como por ansiedade.', delay: '200' },
+          { frase: 'Estou sempre cansada, sem energia.', delay: '300' },
+          { frase: 'Sinto inchaço, retenção de líquido, intestino desregulado.', delay: '400' },
+          { frase: 'O que funcionava antes não funciona mais depois dos 40.', delay: '500' },
+        ].map((item) => (
+          <div
+            class="relative bg-bg rounded-card px-7 pt-10 pb-7 will-animate"
+            data-delay={item.delay}
+            style="border: 1px solid rgba(62,44,36,0.08); box-shadow: 0 2px 8px rgba(62,44,36,0.08);"
+          >
+            <span
+              class="absolute top-0 left-4 font-heading italic text-primary leading-none pointer-events-none select-none"
+              style="font-size: 56px; opacity: 0.3; line-height: 1;"
+              aria-hidden="true"
+            >&ldquo;</span>
+            <p class="font-body text-text text-[15px] md:text-[16px] leading-[1.65]">{item.frase}</p>
+          </div>
+        ))}
+      </div>
+      <div class="mt-12 text-center will-animate" data-delay="600">
+        <div class="w-20 h-px bg-primary opacity-20 mx-auto mb-6"></div>
+        <p class="font-body font-medium text-text text-[16px] md:text-[18px] max-w-[600px] mx-auto">
+          A culpa não é sua. É o metabolismo que mudou.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- D03 — OPORTUNIDADE -->
+  <section id="dobra-03" class={c.d03Class} style={c.d03Style}>
+    <div class="max-w-container mx-auto px-5 md:px-10 py-16 md:py-[100px]">
+      <h2 class={c.d03H2Class} style={c.d03H2Style}>
+        O que a medicina convencional não te conta sobre o metabolismo depois dos 40
+      </h2>
+      <div class="w-20 h-px mx-auto mt-8 mb-10 will-animate" data-delay="100" style={c.d03DividerStyle}></div>
+      <div class="max-w-[760px] mx-auto">
+        <p class={c.d03PClass} data-delay="200" style={c.d03PStyle}>
+          O corpo da mulher 40+ não parou de funcionar. Ele está funcionando de acordo com regras novas, e responde muito bem quando você aprende essas regras.
+        </p>
+        <p class={c.d03PClass} data-delay="300" style={c.d03PStyle}>
+          O problema é que o modelo convencional oferece dois caminhos para esse momento: remédio ou restrição. O remédio mascara o sintoma sem tratar a base. A restrição aumenta o cortisol e trava o metabolismo ainda mais.
+        </p>
+        <p class={c.d03P3Class} data-delay="400" style={c.d03P3Style}>
+          Existe um terceiro caminho. E ele começa por ativar o que já está no seu corpo, não por forçar algo que ele não está preparado para fazer.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- D04 — VÍDEO -->
+  <section id="dobra-04" class="bg-surface">
+    <div class="max-w-container mx-auto px-5 md:px-10 py-16 md:py-[100px]">
+      <h2 class="font-heading font-bold text-text text-[26px] md:text-[34px] leading-[1.18] text-center will-animate">
+        Assista: Como funciona o Acelerador de Resultados
+      </h2>
+      <p class="font-body text-muted text-[15px] md:text-[17px] text-center mt-3 will-animate" data-delay="100">
+        3 minutos para entender como ativar seu metabolismo.
+      </p>
+      <div
+        id="video-facade"
+        class="max-w-[860px] mx-auto mt-10 rounded-card overflow-hidden relative cursor-pointer will-animate md:rounded-card rounded-none"
+        data-delay="200"
+        style="aspect-ratio: 16/9; box-shadow: 0 16px 48px rgba(62,44,36,0.16);"
+      >
+        <div id="video-thumbnail" class="w-full h-full bg-secondary/20 flex items-center justify-center">
+          <span class="font-body text-[12px] text-muted tracking-widest uppercase">Thumbnail do vídeo</span>
+        </div>
+        <div class="absolute inset-0 bg-text/30 pointer-events-none" id="video-overlay"></div>
+        <button
+          id="video-play-btn"
+          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60px] h-[60px] md:w-[72px] md:h-[72px] bg-bg rounded-full flex items-center justify-center transition-all duration-200 hover:bg-surface hover:scale-[1.06] focus-visible:outline-2 focus-visible:outline-primary"
+          style="box-shadow: 0 8px 24px rgba(0,0,0,0.15);"
+          aria-label="Reproduzir vídeo"
+        >
+          <Icon name="ph:play-fill" size={32} class="text-primary ml-1" />
+        </button>
+        <div id="video-iframe-container" class="hidden absolute inset-0"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- D05 — PROVA SOCIAL -->
+  <section id="dobra-05" class="grain-overlay relative" style="background:#8A5A44;">
+    <div class="max-w-container mx-auto px-5 md:px-10 py-16 md:py-[100px]">
+      <h2 class="font-heading font-bold text-[26px] md:text-[34px] leading-[1.18] text-center mb-12 will-animate" style="color:#F2EEE7;">
+        O que acontece quando o metabolismo é tratado na causa
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+        {[
+          { nome: 'Ana C.',      perfil: 'Fome Desregulada',    depoimento: 'Depois de anos tentando de tudo, finalmente entendi o que estava acontecendo no meu corpo. Em 3 meses já sentia a diferença na energia e no humor.',                                    resultado: 'Perdeu 8kg em 4 meses · Parou com compulsão alimentar',  img: 'depoimento-01-resultado.jpg', delay: '0'   },
+          { nome: 'Carla M.',    perfil: 'Energia Baixa',        depoimento: 'Achei que era só cansaço da idade. A Dra. Márcia mostrou que era o metabolismo operando em modo economia. Hoje acordo disposta e sem depender de café.',                                  resultado: 'Perdeu 11kg em 5 meses · Energia recuperada',            img: 'depoimento-02-resultado.jpg', delay: '100' },
+          { nome: 'Renata S.',   perfil: 'Inflamação Metabólica', depoimento: 'O inchaço que me acompanhava há anos sumiu nas primeiras semanas. Não acreditava que era possível sem remédio.',                                                                        resultado: 'Perdeu 7kg em 3 meses · Fim do inchaço crônico',         img: 'depoimento-03-resultado.jpg', delay: '200' },
+          { nome: 'Patrícia L.', perfil: 'Fome Desregulada',    depoimento: 'O programa me deu estrutura e uma nutricionista que acompanha de perto. Pela primeira vez não sinto que estou sozinha nessa jornada.',                                                     resultado: 'Perdeu 14kg em 6 meses · Autonomia alimentar consolidada', img: 'depoimento-04-resultado.jpg', delay: '300' },
+        ].map((item) => (
+          <div
+            class="bg-bg rounded-card will-animate"
+            data-delay={item.delay}
+            style="padding: 28px 32px; box-shadow: 0 4px 16px rgba(62,44,36,0.12);"
+          >
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-12 h-12 rounded-full overflow-hidden shrink-0 bg-surface flex items-center justify-center" style="border: 2px solid #B89A6A;">
+                <img src={`/images/${item.img}`} alt={`Foto de ${item.nome}`} class="w-full h-full object-cover" loading="lazy" decoding="async" />
+              </div>
+              <div>
+                <p class="font-body font-semibold text-text text-[14px]">{item.nome}</p>
+                <p class="font-body font-medium text-muted text-[12px] uppercase tracking-[0.08em]">{item.perfil}</p>
+              </div>
+            </div>
+            <div class="h-px bg-surface mt-3 mb-4"></div>
+            <p class="font-body text-text text-[15px] leading-[1.65] italic mb-3">&ldquo;{item.depoimento}&rdquo;</p>
+            <p class="font-body font-bold text-secondary text-[14px]">{item.resultado}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- D06 — PERFIS METABÓLICOS -->
+  <section id="dobra-06" class="bg-bg">
+    <div class="max-w-container mx-auto px-5 md:px-10 py-16 md:py-[100px]">
+      <h2 class="font-heading font-bold text-text text-[26px] md:text-[34px] leading-[1.18] text-center will-animate">
+        Qual é o seu perfil metabólico?
+      </h2>
+      <p class="font-body text-muted text-[15px] md:text-[17px] leading-[1.65] text-center mt-4 mb-12 max-w-[65ch] mx-auto will-animate" data-delay="100">
+        Não existe estratégia genérica. Cada perfil precisa de uma estratégia completamente diferente.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {c.perfis.map((p) => (
+          <div
+            class="bg-bg rounded-card p-8 will-animate transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+            data-delay={p.delay}
+            style={`border: 1px solid rgba(62,44,36,0.08); border-top: 3px solid ${p.borda}; box-shadow: 0 2px 8px rgba(62,44,36,0.08);`}
+          >
+            <div class="w-16 h-16 rounded-full flex items-center justify-center mb-5 text-4xl" style={`background: ${p.bg};`}>
+              {p.emoji}
+            </div>
+            <h3 class="font-heading font-semibold text-[20px] leading-[1.3] mb-4" style={`color: ${p.cor};`}>{p.nome}</h3>
+            <p class="font-body text-text text-[15px] leading-[1.65] italic">
+              {p.nome === 'Fome Desregulada'    && '"Você belisca o dia todo, come quando está ansiosa e sente culpa depois. Não é fraqueza, é cortisol alto e glicose em montanha-russa pedindo regulação, não restrição."'}
+              {p.nome === 'Energia Baixa'        && '"Você acorda sem disposição, depende de café para funcionar e entra em colapso no meio da tarde. Não é preguiça, é o metabolismo operando em modo de economia forçada por falta dos nutrientes certos."'}
+              {p.nome === 'Inflamação Metabólica' && '"Você tem inchaço abdominal, retenção de líquido, dores no corpo e intestino irregular. Não é azar, é inflamação silenciosa que retém peso por proteção e que responde quando tratada na raiz."'}
+            </p>
+          </div>
+        ))}
+      </div>
+      <p class="font-body font-medium text-text text-[16px] text-center mt-12 max-w-[640px] mx-auto will-animate" data-delay="450">
+        O diagnóstico do seu perfil acontece na primeira sessão com a Dra. Márcia. Tudo o que vem depois é construído em cima dele.
+      </p>
+    </div>
+  </section>
+
+  <!-- D07 — JORNADA -->
+  <section id="dobra-07" class="bg-surface">
+    <div class="max-w-container mx-auto px-5 md:px-10 py-16 md:py-[100px]">
+      <h2 class="font-heading font-bold text-text text-[26px] md:text-[34px] leading-[1.18] text-center mb-12 will-animate">
+        Sua jornada de 6 meses
+      </h2>
+      <div class="max-w-[800px] mx-auto flex flex-col gap-4">
+        {[
+          { badge: '⭐',       fase: 'Fase 1: Despertando',  semanas: 'Semanas 1–2',   desc: 'Acordar o metabolismo, desinflamação inicial, ajuste de sono e hidratação.',         delay: '0'   },
+          { badge: '⭐⭐',     fase: 'Fase 2: Reacendendo',  semanas: 'Semanas 3–4',   desc: 'Primeiros resultados visíveis, intensificação gradual, introdução de exercícios.',    delay: '100' },
+          { badge: '⭐⭐⭐',   fase: 'Fase 3: Impulsionado', semanas: 'Semanas 5–12',  desc: 'Potencializar emagrecimento, ciclagem de cardápios, força e definição.',             delay: '200' },
+          { badge: '⭐⭐⭐⭐', fase: 'Fase 4: Ativado',      semanas: 'Semanas 13–24', desc: 'Manutenção inteligente, prevenção de recaídas, autonomia consolidada.',               delay: '300' },
+        ].map((item) => (
+          <div
+            class="bg-bg rounded-[12px] px-7 py-6 flex flex-col md:flex-row md:items-start gap-4 will-animate transition-all duration-[250ms] hover:shadow-md"
+            data-delay={item.delay}
+            style="border-left: 4px solid #B89A6A; box-shadow: 0 2px 8px rgba(62,44,36,0.08);"
+          >
+            <div class="shrink-0 font-body font-medium text-[14px] rounded-[8px] px-[10px] py-1 self-start" style="background: rgba(184,154,106,0.12);">
+              {item.badge}
+            </div>
+            <div>
+              <p class="font-heading font-semibold text-text text-[18px] leading-[1.3]">{item.fase}</p>
+              <p class="font-body font-medium text-muted text-[12px] uppercase tracking-[0.08em] mt-0.5 mb-2">{item.semanas}</p>
+              <p class="font-body text-text text-[15px] leading-[1.6]">{item.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- D08 — ENTREGÁVEIS -->
+  <section id="dobra-08" class="bg-bg">
+    <div class="max-w-container mx-auto px-5 md:px-10 py-16 md:py-[100px]">
+      <h2 class="font-heading font-bold text-text text-[26px] md:text-[34px] leading-[1.18] text-center will-animate">
+        Tudo que você vai receber
+      </h2>
+      <p class="font-body text-muted text-[15px] md:text-[17px] text-center mt-4 mb-12 max-w-[65ch] mx-auto will-animate" data-delay="100">
+        Para ativar o metabolismo e emagrecer de forma definitiva nos próximos 6 meses:
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {[
+          { icon: 'ph:stethoscope',   titulo: 'Diagnóstico individual completo', desc: 'Seu ponto de partida personalizado, com sessão individual, lista de exames recomendados e plano de ação por escrito.',                                                       delay: '0'   },
+          { icon: 'ph:device-mobile', titulo: 'App com plano personalizado',     desc: 'Cada semana você abre o app e encontra as estratégias da sua fase, o cardápio e a lista de suplementos.',                                                                      delay: '50'  },
+          { icon: 'ph:user-circle',   titulo: 'Acompanhamento nutricional',      desc: 'A nutricionista Bianca verifica se o plano está sendo executado, identifica o que está travando e faz os ajustes antes que virem problemas.',                                  delay: '100' },
+          { icon: 'ph:calendar-check',titulo: '6 sessões individuais',           desc: 'Acompanhamento mensal com a Dra. Márcia ou com a nutricionista, para reavaliação completa do progresso e ajuste do plano.',                                                    delay: '150' },
+          { icon: 'ph:video-camera',  titulo: '12 encontros ao vivo',            desc: '2x por mês em grupo, com a Dra. Márcia, com perguntas respondidas ao vivo e mini-aulas temáticas. Sempre gravado para quem não puder ao vivo.',                               delay: '200' },
+          { icon: 'ph:headphones',    titulo: 'Áudios diários',                  desc: 'Todos os dias, um áudio da Dra. Márcia para manter a mentalidade no lugar certo mesmo quando a rotina aperta.',                                                               delay: '250' },
+          { icon: 'ph:map-trifold',   titulo: 'Guias para situações especiais',  desc: 'Viagens, festas, finais de semana, TPM, família que não apoia. Para que a vida real não derrube o que você construiu durante a semana.',                                       delay: '300' },
+          { icon: 'ph:graduation-cap',titulo: 'Curso Método AME',                desc: 'Acesso completo ao conteúdo educativo do método para quem quer entender a fundo o que está acontecendo no próprio corpo.',                                                     delay: '350' },
+          { icon: 'ph:pill',          titulo: 'Suplementação personalizada',     desc: 'Lista de suplementos e fitoterápicos adequados ao seu perfil, com dosagens e horários definidos pela Dra. Márcia e ajustados a cada reavaliação mensal.',                      delay: '400' },
+        ].map((item) => (
+          <div
+            class="bg-bg rounded-card px-6 py-7 text-left will-animate transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+            data-delay={item.delay}
+            style="border: 1px solid rgba(62,44,36,0.08); box-shadow: 0 2px 8px rgba(62,44,36,0.08);"
+          >
+            <div class="w-[52px] h-[52px] rounded-[12px] flex items-center justify-center mb-4" style="background: rgba(184,154,106,0.10);">
+              <Icon name={item.icon} size={24} class="text-primary" />
+            </div>
+            <h3 class="font-heading font-semibold text-text text-[18px] leading-[1.3] mb-2">{item.titulo}</h3>
+            <p class="font-body text-muted text-[14px] leading-[1.6]">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+      <p class="font-body font-medium text-text text-[16px] text-center mt-12 max-w-[640px] mx-auto will-animate" data-delay="450">
+        Tudo organizado para que você nunca precise adivinhar o próximo passo.
+      </p>
+    </div>
+  </section>
+
+  <!-- D09 — APP -->
+  <section id="dobra-09" class="bg-surface">
+    <div class="max-w-container mx-auto px-5 md:px-10 py-16 md:py-[100px]">
+      <h2 class="font-heading font-bold text-text text-[26px] md:text-[34px] leading-[1.18] text-center will-animate">
+        Seu plano, organizado semana a semana
+      </h2>
+      <p class="font-body text-muted text-[15px] md:text-[17px] text-center mt-4 mb-16 max-w-[65ch] mx-auto will-animate" data-delay="100">
+        Não precisa adivinhar o que fazer. Tudo vem direcionado para você.
+      </p>
+      <div class="flex flex-col gap-16 md:gap-24">
+        {[
+          { side: 'left',  titulo: 'Tudo que você precisa, em um só lugar.', items: ['Mensagem personalizada da Dra. Márcia', 'Estratégias específicas da sua fase', 'Cardápio da semana em PDF', 'Lista de suplementos com horários', 'Checkboxes diários para acompanhar'], img: 'app-mockup-plano.jpg'     },
+          { side: 'right', titulo: 'Acompanhe sua evolução.',                items: ['Gráfico de peso e tendência', 'Galeria de fotos de progresso', 'Sequência de dias (streak)', 'Histórico completo'],                                                                   img: 'app-mockup-progresso.jpg' },
+          { side: 'left',  titulo: 'Tudo personalizado para você.',          items: ['Características do seu perfil', 'Suplementos específicos', 'Próximas reavaliações', 'Progresso e metas'],                                                                             img: 'app-mockup-perfil.jpg'    },
+        ].map((bloco) => (
+          <div class={`flex flex-col ${bloco.side === 'right' ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-10 md:gap-20`}>
+            <div class="w-full md:w-[42%] flex justify-center will-animate" data-delay="0">
+              <div class="relative" style="width: 220px; min-width: 200px;">
+                <div class="relative overflow-hidden" style="border-radius: 40px; border: 10px solid #3E2C24; aspect-ratio: 9/19; box-shadow: 0 25px 60px rgba(62,44,36,0.20);">
+                  <div class="absolute top-3 left-1/2 -translate-x-1/2 z-10" style="width: 70px; height: 18px; background: #3E2C24; border-radius: 10px;"></div>
+                  <div class="w-full h-full relative" style="background: linear-gradient(160deg, #F2EEE7 0%, #D8CBBE 100%);">
+                    <img src={`/images/${bloco.img}`} alt="" class="w-full h-full object-cover" loading="lazy" decoding="async" style="display:block;" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="w-full md:w-[58%] will-animate" data-delay="150">
+              <h3 class="font-heading font-semibold text-text text-[20px] md:text-[22px] leading-[1.28] mb-6">{bloco.titulo}</h3>
+              <ul class="flex flex-col gap-3">
+                {bloco.items.map((item) => (
+                  <li class="flex items-center gap-3">
+                    <span class="shrink-0 w-5 h-5 rounded-full flex items-center justify-center" style="background: #B89A6A;">
+                      <Icon name="ph:check-bold" size={12} style="color: white;" />
+                    </span>
+                    <span class="font-body text-text text-[15px]">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- D10 — INVESTIMENTO -->
+  <section id="dobra-10" class="grain-overlay relative" style="background:#8A5A44;">
+    <div class="max-w-container mx-auto px-5 md:px-10 py-16 md:py-[100px]">
+      <h2 class="font-heading font-bold text-[26px] md:text-[34px] leading-[1.18] text-center will-animate" style="color:#F2EEE7;">
+        Investimento
+      </h2>
+      <p class="font-body text-[15px] md:text-[17px] text-center mt-3 mb-10 will-animate" data-delay="100" style="color: rgba(242,238,231,0.8);">
+        6 meses de acompanhamento completo
+      </p>
+      <div
+        class="max-w-[520px] mx-auto rounded-[20px] will-animate"
+        data-delay="200"
+        style="background:#F2EEE7; padding: 48px 32px; box-shadow: 0 16px 48px rgba(62,44,36,0.16);"
+      >
+        <p class="font-body font-bold text-text text-center leading-[1] mb-2" style="font-size: 48px;">
+          12x de R$ 297
+        </p>
+        <p class="font-body text-muted text-[20px] text-center mt-2">ou R$ 3.000 à vista</p>
+        <p class="font-body font-medium text-primary text-[14px] text-center mt-2">Menos de R$ 17 por dia</p>
+        <div class="h-px bg-surface mt-8 mb-8"></div>
+        <CTAButton
+          href={HOTMART_LINK}
+          gtmLocation="dobra_investimento"
+          gtmLabel="quero_participar"
+          glow={true}
+          fullWidth={true}
+          class="!min-h-[52px] !text-[15px] tracking-wide"
+        >
+          QUERO PARTICIPAR
+        </CTAButton>
+        <p class="font-body text-muted text-[12px] text-center mt-4 flex items-center justify-center gap-2">
+          <Icon name="ph:shield-check" size={16} class="text-muted shrink-0" />
+          Acesso imediato · Garantia de 7 dias · Pagamento seguro via Hotmart
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- D11 — AUTORIDADE -->
+  <section id="dobra-11" class="bg-bg">
+    <div class="max-w-container mx-auto px-5 md:px-10 py-16 md:py-[100px]">
+      <div class="flex flex-col md:flex-row md:items-start md:gap-16">
+        <div class="w-full md:w-[40%] mb-10 md:mb-0">
+          <div class="relative rounded-[20px] overflow-hidden will-animate" data-delay="0" style="aspect-ratio: 3/4; max-height: 560px;">
+            <img
+              src="/images/autoridade-marcia-bio.jpg"
+              alt="Dra. Márcia Rocha — 51 anos, médica especialista em Nutrologia e Medicina Integrativa"
+              class="w-full h-full object-cover object-top"
+              loading="lazy"
+              decoding="async"
+            />
+            <div
+              class="absolute inset-0 pointer-events-none"
+              style="background: linear-gradient(to top, rgba(242,238,231,0.5) 0%, transparent 20%);"
+            ></div>
+          </div>
+        </div>
+        <div class="md:w-[60%]">
+          <h2 class="font-heading font-bold text-text text-[26px] md:text-[32px] leading-[1.18] will-animate" data-delay="0">
+            Quem criou o Método AME
+          </h2>
+          <h3 class="font-heading font-bold text-text text-[22px] md:text-[26px] leading-[1.2] mt-3 will-animate" data-delay="80">
+            Dra. Márcia Rocha
+          </h3>
+          <p class="font-body font-semibold text-muted text-[15px] mt-1 mb-6 will-animate" data-delay="100">
+            Médica especialista em Nutrologia e Medicina Integrativa
+          </p>
+          <p class="font-body text-text text-[15px] md:text-[16px] leading-[1.65] mb-4 max-w-[65ch] will-animate" data-delay="200">
+            Com mais de 28 anos de medicina e centenas de mulheres acompanhadas, a Dra. Márcia Rocha desenvolveu o Método AME depois de um caminho pessoal: ao testemunhar o declínio da própria avó por falta de uma estratégia preventiva, ela decidiu abandonar a medicina paliativa e se especializar no metabolismo da mulher 40+.
+          </p>
+          <p class="font-body text-text text-[15px] md:text-[16px] leading-[1.65] mb-6 max-w-[65ch] will-animate" data-delay="300">
+            Hoje, com 51 anos e na menopausa, ela vive o que prescreve. Não fala da menopausa em teoria. Ela gerencia a própria.
+          </p>
+          <blockquote
+            class="font-heading italic text-text text-[15px] md:text-[17px] leading-[1.65] mb-8 max-w-[65ch] will-animate"
+            data-delay="400"
+            style="border-left: 3px solid #B89A6A; padding-left: 20px; margin-top: 24px;"
+          >
+            &ldquo;A minha missão é mostrar que a maturidade pode ser o auge da sua saúde, não o começo do declínio.&rdquo;
+          </blockquote>
+          <div class="will-animate" data-delay="500">
+            <CTAButton href={HOTMART_LINK} gtmLocation="dobra_autoridade" gtmLabel="quero_participar_programa" class="w-full md:w-auto">
+              QUERO PARTICIPAR DO PROGRAMA
+            </CTAButton>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- D12 — FAQ -->
+  <section id="dobra-12" class="bg-surface">
+    <div class="max-w-container mx-auto px-5 md:px-10 py-16 md:py-[100px]">
+      <h2 class="font-heading font-bold text-text text-[26px] md:text-[34px] leading-[1.18] text-center mb-12 will-animate">
+        Perguntas Frequentes
+      </h2>
+      <div class="max-w-[720px] mx-auto flex flex-col gap-2">
+        {[
+          { p: 'Preciso ter os exames de sangue antes de começar?',  r: 'Não. Os exames não bloqueiam o início do programa. Na primeira sessão eu te envio a lista dos exames recomendados, mas você pode começar mesmo sem eles. Quando tiver os resultados, você me envia e eu faço os ajustes necessários.', d: '0'   },
+          { p: 'Como funcionam as sessões individuais?',              r: 'São 6 sessões ao longo dos 6 meses. Mês 1: comigo (30min) para diagnóstico completo. Meses 2, 3 e 5: com nutricionista (15min). Mês 4: comigo (20min) para reavaliação trimestral. Mês 6: comigo (30min) para reavaliação final. Todas são online.', d: '60'  },
+          { p: 'E se eu viajar durante o programa?',                  r: 'Temos guias específicos para viagens, festas e situações especiais. O importante é voltar no dia seguinte, sem culpa. O programa se adapta à sua vida.', d: '120' },
+          { p: 'Vou receber os cardápios prontos?',                   r: 'Sim. Cada semana você recebe o cardápio em PDF, já adaptado para o seu perfil metabólico. Não precisa montar nada.', d: '180' },
+          { p: 'Como funciona o parcelamento?',                       r: 'Você pode parcelar em até 12x de R$ 297 sem juros no cartão de crédito, ou pagar R$ 3.000 à vista. O pagamento é processado pela Hotmart e você tem acesso imediato após a confirmação.', d: '240' },
+          { p: 'Tem garantia?',                                       r: 'Sim, você tem 7 dias de garantia incondicional. Se por qualquer motivo você não quiser continuar, é só solicitar o reembolso total.', d: '300' },
+          { p: 'Posso pausar o programa?',                            r: 'Em casos específicos como cirurgia, luto ou mudança, a Dra. Márcia avalia caso a caso. O máximo de pausa permitido é 1 mês, e você retoma de onde parou.', d: '360' },
+        ].map((item) => (
+          <div data-faq-item class="bg-bg rounded-[12px] overflow-hidden will-animate" data-delay={item.d} style="border: 1px solid rgba(62,44,36,0.10);">
+            <button data-faq-trigger aria-expanded="false" class="w-full flex items-center justify-between gap-4 px-6 py-5 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary">
+              <span class="font-body font-semibold text-text text-[15px]">{item.p}</span>
+              <Icon name="ph:caret-down" size={16} class="text-primary shrink-0" data-faq-icon style="transition: transform 200ms ease;" />
+            </button>
+            <div data-faq-content style="max-height: 0; overflow: hidden; transition: max-height 300ms ease;">
+              <p class="font-body text-muted text-[15px] leading-[1.65] px-6 pb-5">{item.r}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- D13 — CTA FINAL -->
+  <section id="dobra-13" class="relative overflow-hidden" style={c.d13Style}>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[560px] h-[560px] rounded-full pointer-events-none z-0" style={c.d13RadialStyle}></div>
+    <div class="max-w-container mx-auto px-5 md:px-10 py-[80px] md:py-[120px] relative z-10">
+      <div class="max-w-[680px] mx-auto text-center">
+        <h2 class="font-heading font-bold text-text text-[26px] md:text-[34px] leading-[1.18] will-animate">
+          Pronta para parar de começar do zero?
+        </h2>
+        <p class="font-body font-medium text-muted text-[15px] md:text-[17px] leading-[1.65] mt-4 will-animate" data-delay="100">
+          Centenas de mulheres já ativaram o metabolismo com o Método AME. A próxima pode ser você.
+        </p>
+        <p class="font-body text-text text-[15px] md:text-[16px] leading-[1.65] mt-6 max-w-[560px] mx-auto will-animate" data-delay="200">
+          O Acelerador de Resultados começa com uma sessão individual com a Dra. Márcia, onde você vai entender exatamente o que está acontecendo no seu corpo e o que precisa mudar. Não é mais uma dieta. É a estratégia que faltava.
+        </p>
+        <div class="mt-10 will-animate" data-delay="300">
+          <CTAButton
+            href={HOTMART_LINK}
+            gtmLocation="dobra_cta_final"
+            gtmLabel="quero_acesso_agora"
+            glow={true}
+            class="w-full md:w-auto !min-h-[56px] !px-12 !text-[15px]"
+          >
+            QUERO ACESSO AGORA
+          </CTAButton>
+        </div>
+        <p class="font-body text-muted text-[13px] mt-4 will-animate" data-delay="400">
+          Parcelamento em até 12x sem juros.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- D14 — FOOTER -->
+  <footer id="dobra-14" style="background:#8A5A44;">
+    <div class="max-w-container mx-auto px-5 md:px-10 py-16">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <p class="font-body font-semibold text-[16px] mb-2" style="color:#F2EEE7;">Dra. Márcia Rocha</p>
+          <p class="font-body text-[13px] leading-[1.65] mb-4" style="color:rgba(242,238,231,0.65);">Médica Especialista em Nutrologia e Medicina Integrativa</p>
+          <!-- TODO: preencher com dados legais reais -->
+          <p class="font-body text-[13px] leading-[1.7]" style="color:rgba(242,238,231,0.65);">
+            [Nome da empresa] | CNPJ [número]<br/>
+            [Endereço] — [Cidade/Estado]<br/>
+            [e-mail de contato]
+          </p>
+        </div>
+        <div>
+          <p class="font-body font-semibold text-[13px] uppercase tracking-[0.08em] mb-4" style="color:#F2EEE7;">Links</p>
+          <ul class="flex flex-col gap-2">
+            {['Instagram', 'YouTube', 'Contato'].map((link) => (
+              <li><a href="#" class="font-body text-[13px] transition-colors duration-150 hover:opacity-100" style="color:rgba(242,238,231,0.65);">{link}</a></li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <p class="font-body font-semibold text-[13px] uppercase tracking-[0.08em] mb-4" style="color:#F2EEE7;">Legal</p>
+          <ul class="flex flex-col gap-2">
+            {['Termos de Uso', 'Política de Privacidade'].map((link) => (
+              <li><a href="#" class="font-body text-[13px] transition-colors duration-150 hover:opacity-100" style="color:rgba(242,238,231,0.65);">{link}</a></li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <div class="mt-12 mb-6 h-px" style="background: rgba(242,238,231,0.15);"></div>
+      <p class="font-body text-[12px] text-center" style="color:rgba(242,238,231,0.5);">© 2026 Dra. Márcia Rocha. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+</LayoutBase>
+
+<script>
+  import { initScrollReveal } from '../scripts/scrollReveal'
+  import { initFaqAccordion } from '../scripts/faqAccordion'
+
+  document.addEventListener('DOMContentLoaded', () => {
+    initScrollReveal()
+    initFaqAccordion(false)
+
+    document.querySelectorAll('img').forEach((img) => {
+      img.addEventListener('error', () => { img.style.visibility = 'hidden' })
+      if (img.complete && img.naturalWidth === 0) img.style.visibility = 'hidden'
+    })
+
+    const playBtn = document.getElementById('video-play-btn')
+    const thumbnail = document.getElementById('video-thumbnail')
+    const overlay = document.getElementById('video-overlay')
+    const iframeContainer = document.getElementById('video-iframe-container')
+
+    if (playBtn && iframeContainer) {
+      playBtn.addEventListener('click', () => {
+        // TODO: substituir pelo URL embed real do vídeo
+        const videoEmbedUrl = 'about:blank'
+        iframeContainer.innerHTML = `<iframe src="${videoEmbedUrl}" class="w-full h-full" allow="autoplay; fullscreen" allowfullscreen loading="lazy"></iframe>`
+        iframeContainer.classList.remove('hidden')
+        if (playBtn) playBtn.style.display = 'none'
+        if (thumbnail) thumbnail.style.display = 'none'
+        if (overlay) overlay.style.display = 'none'
+      })
+    }
+  })
+</script>
